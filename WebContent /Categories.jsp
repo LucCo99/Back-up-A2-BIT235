@@ -81,7 +81,7 @@
 		<ul>
 			<li><a href="Home.jsp">Home</a></li>
 			<li><a href="ArticleServlet">Articles</a></li>
-			<li><a href="CategoriesServlet">Categories</a></li>
+			<li><a href="">Categories</a></li>
 			<li><a href="login.jsp">Admin</a></li>
 		</ul>
 		<table>
@@ -89,18 +89,15 @@
 				<tr>
 					<th>ID</th>
 					<th>Title</th>
-					<th>Body</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="article" items="${listArticle}">
-					<tr align="center">
-						<td><c:out value="${article.getId()}" /></td>
-						<td><c:out value="${article.getTitle()}" /></td>
-						<td><c:out value="${article.getBody()}" /></td>
-						
-					</tr>
-				</c:forEach>
+				<c:forEach items="${listCategories}" var="categories">
+			<tr>
+			<td><c:out value="${categories.getId()}" /></td>
+						<td><c:out value="${categories.getTitle()}" /></td>
+			</tr>
+		</c:forEach>
 			</tbody>
 		</table>
 	</div>

@@ -8,23 +8,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.javaguides.login.bean.Article;
 import net.javaguides.login.bean.Categories;
 
-public class ArticleDao {
+
+public class CategoriesDao {
 
     // Define instance variables
     private String DBURL = "jdbc:mysql://localhost:3306/emp?serverTimezone=Australia/Melbourne";
     private String DBUsername = "root";
     private String DBPassword = "p@ssw0rd";
 
-    private String INSERTARTICLESQL = "INSERT INTO articles (title, body, date) VALUES (?, ?, ?);";
-    private String SELECTARTICLEID = "SELECT id, title, body, date FROM articles WHERE id = ?";
-    private String SELECTALLARTICLES = "SELECT * FROM articles";
-    private String DELETEARTICLESQL = "DELETE FROM articles WHERE id = ?;";
-    private String UPDATEARTICLESQL = "UPDATE articles SET title = ?, body = ?, date = ? WHERE id = ?;";
+    private String INSERTCategoriesSQL = "INSERT INTO articles (title, body, date) VALUES (?, ?, ?);";
+    private String SELECTCategoriesID = "SELECT id, title, body, date FROM articles WHERE id = ?";
+    private String SELECTALLCategoriesS = "SELECT * FROM articles";
+    private String DELETECategoriesSQL = "DELETE FROM articles WHERE id = ?;";
+    private String UPDATECategoriesSQL = "UPDATE articles SET title = ?, body = ?, date = ? WHERE id = ?;";
 
-    public ArticleDao() {
+    public CategoriesDao() {
     }
 
     protected Connection getConnection() {
@@ -40,15 +40,15 @@ public class ArticleDao {
         return connection;
     }
 
-    public void insertArticle(Article article) throws SQLException {
+    public void insertCategories(Categories Categories) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(INSERTARTICLESQL);
-            preparedStatement.setString(1, article.getTitle());
-            preparedStatement.setString(2, article.getBody());
-            //preparedStatement.setDate(3, article.getDate());
+            preparedStatement = connection.prepareStatement(INSERTCategoriesSQL);
+            //preparedStatement.setLong(1, Categories.getId());
+            preparedStatement.setString(2, Categories.getTitle());
+            //preparedStatement.setDate(3, Categories.getDate());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
@@ -57,111 +57,85 @@ public class ArticleDao {
         }
     }
 
-    public Article selectArticle(int id) {
-        Article article = null;
+    public Categories selectCategories(int id) {
+        Categories Categories = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(SELECTARTICLEID);
+            preparedStatement = connection.prepareStatement(SELECTCategoriesID);
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String title = rs.getString("title");
-                String body = rs.getString("body");
-                String date = rs.getString("date");
-                article = new Article(id, title, body, date);
+                Categories = new Categories(id, title);
             }
         } catch (SQLException e) {
             printSQLException(e);
         } finally {
             finallySQLException(connection, preparedStatement, rs);
         }
-        return article;
+        return Categories;
     }
 
-    public List<Article> selectAllArticles() {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        List<Article> articles = new ArrayList<>();
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(SELECTALLARTICLES);
-            rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String title = rs.getString("title");
-                String body = rs.getString("body");
-                String date = rs.getString("date");
-                articles.add(new Article(id, title, body, date));
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        } finally {
-            finallySQLException(connection, preparedStatement, rs);
-        }
-        return articles;
-    }
     
     public List<Categories> selectAllCategories() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<Categories> articles = new ArrayList<>();
+        List<Categories> Categoriess = new ArrayList<>();
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(SELECTALLARTICLES);
+            preparedStatement = connection.prepareStatement(SELECTALLCategoriesS);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                articles.add(new Categories(id, title));
+                Categoriess.add(new Categories(id, title));
             }
         } catch (SQLException e) {
             printSQLException(e);
         } finally {
             finallySQLException(connection, preparedStatement, rs);
         }
-        return articles;
+        return Categoriess;
     }
 
-    public boolean deleteArticle(int id) throws SQLException {
-        boolean articleDeleted = false;
+    public boolean deleteCategories(int id) throws SQLException {
+        boolean CategoriesDeleted = false;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = getConnection(); 
-            preparedStatement = connection.prepareStatement(DELETEARTICLESQL);
+            preparedStatement = connection.prepareStatement(DELETECategoriesSQL);
             preparedStatement.setInt(1, id);
-            articleDeleted = preparedStatement.executeUpdate() > 0 ? true : false;
+            CategoriesDeleted = preparedStatement.executeUpdate() > 0 ? true : false;
         } finally {
             finallySQLException(connection, preparedStatement, null);
         }
-        return articleDeleted;
+        return CategoriesDeleted;
     }
 
 
-public boolean updateArticle(Article article) throws SQLException {
-    boolean articleUpdated = false;
+public boolean updateCategories(Categories Categories) throws SQLException {
+    boolean CategoriesUpdated = false;
     Connection connection = null; 
     PreparedStatement preparedStatement = null;
     try {
         connection = getConnection(); 
-        preparedStatement = connection.prepareStatement(UPDATEARTICLESQL);
+        preparedStatement = connection.prepareStatement(UPDATECategoriesSQL);
         // Use the appropriate setters to set the values for the prepared statement
-        preparedStatement.setString(1, article.getTitle());
-        preparedStatement.setString(2, article.getBody());
-        preparedStatement.setInt(3, article.getId());
-        articleUpdated = preparedStatement.executeUpdate() > 0 ? true : false;
+        preparedStatement.setString(1, Categories.getTitle());
+        preparedStatement.setInt(3, Categories.getId());
+        CategoriesUpdated = preparedStatement.executeUpdate() > 0 ? true : false;
     } catch (SQLException e) {
         // Handle any exceptions that occur during execution of the prepared statement
         printSQLException(e);
     } finally {
         finallySQLException(connection, preparedStatement, null);
     }
-    return articleUpdated;
+    return CategoriesUpdated;
 }
 
     private void printSQLException(SQLException ex) {

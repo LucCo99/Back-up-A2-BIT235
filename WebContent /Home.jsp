@@ -62,7 +62,7 @@
 		<ul>
 				<li><a href="#">Home</a></li>
 				<li><a href="ArticleServlet">Articles</a></li>
-				<li><a href="#">Categories</a></li>
+				<li><a href="CategoriesServlet">Categories</a></li>
 				<li><a href="login.jsp">Admin</a></li>
 		</ul>
 	</div>
