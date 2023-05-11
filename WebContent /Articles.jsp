@@ -22,6 +22,10 @@
 		box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 	}
 	
+	.article-title {
+  font-weight: bold;
+}
+	
 	h1 {
 		text-align: center;
 		color: #333;
@@ -77,32 +81,30 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Wiki Application</h1>
-		<ul>
-			<li><a href="Home.jsp">Home</a></li>
-			<li><a href="ArticleServlet">Articles</a></li>
-			<li><a href="CategoriesServlet">Categories</a></li>
-			<li><a href="login.jsp">Admin</a></li>
-		</ul>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Body</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="article" items="${listArticle}">
-					<tr align="center">
-						<td><c:out value="${article.getId()}" /></td>
-						<td><c:out value="${article.getTitle()}" /></td>
-						<td><c:out value="${article.getBody()}" /></td>
-						
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+	<form method="get" action="ArticleServlet" style="position: absolute; top: 20px; right: 20px;">
+  <input type="text" name="keyword" placeholder="Search articles...">
+  <button type="submit">Search</button>
+</form>
+    <h1>Wiki Application</h1>
+    <ul>
+        <li><a href="Home.jsp">Home</a></li>
+        <li><a href="ArticleServlet">Articles</a></li>
+        <li><a href="CategoriesServlet">Categories</a></li>
+        <li><a href="login.jsp">Admin</a></li>
+    </ul>
+    <table>
+        <tbody>
+        	<h2>Recent Articles</h2>
+            <c:forEach var="article" items="${listArticle}">
+                <tr>
+                    <td>
+                        <div class="article-title"><c:out value="${article.getTitle()}" /></div>
+                        <div class="article-body"><c:out value="${article.getBody()}" /></div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

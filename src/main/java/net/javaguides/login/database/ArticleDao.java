@@ -56,6 +56,8 @@ public class ArticleDao {
             finallySQLException(connection, preparedStatement, null);
         }
     }
+    
+   
 
     public Article selectArticle(int id) {
         Article article = null;
@@ -80,6 +82,33 @@ public class ArticleDao {
         }
         return article;
     }
+    public List<Article> searchArticlesByKeyword(String keyword) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Article> articles = new ArrayList<>();
+        try {
+            connection = getConnection();
+            String query = "SELECT * FROM articles WHERE title LIKE ? OR body LIKE ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String body = rs.getString("body");
+                String date = rs.getString("date");
+                articles.add(new Article(id, title, body, date));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        } finally {
+            finallySQLException(connection, preparedStatement, rs);
+        }
+        return articles;
+    }
+
 
     public List<Article> selectAllArticles() {
         Connection connection = null;
@@ -104,7 +133,7 @@ public class ArticleDao {
         }
         return articles;
     }
-    
+      
     public List<Categories> selectAllCategories() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -163,6 +192,8 @@ public boolean updateArticle(Article article) throws SQLException {
     }
     return articleUpdated;
 }
+
+
 
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

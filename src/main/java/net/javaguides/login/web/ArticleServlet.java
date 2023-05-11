@@ -32,17 +32,27 @@ public class ArticleServlet extends HttpServlet {
 	public void init() {
 		artDAO = new ArticleDao();
 	}
+	
+	//
+	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request, response);
-	}
+	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String keyword = request.getParameter("keyword");
+        ArticleDao articleDao = new ArticleDao();
+        List<Article> articles;
+        if (keyword != null && !keyword.isEmpty()) {
+            articles = articleDao.searchArticlesByKeyword(keyword);
+        } else {
+            articles = articleDao.selectAllArticles();
+        }
+        request.setAttribute("listArticle", articles);
+        request.getRequestDispatcher("Articles.jsp").forward(request, response);
+    }
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
