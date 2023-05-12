@@ -11,7 +11,7 @@ import java.util.List;
 import net.javaguides.login.bean.Article;
 import net.javaguides.login.bean.Categories;
 
-public class ArticleDao {
+public class HomeDao {
 
     // Define instance variables
     private String DBURL = "jdbc:mysql://localhost:3306/emp?serverTimezone=Australia/Melbourne";
@@ -24,7 +24,7 @@ public class ArticleDao {
     private String DELETEARTICLESQL = "DELETE FROM articles WHERE id = ?;";
     private String UPDATEARTICLESQL = "UPDATE articles SET title = ?, body = ?, date = ? WHERE id = ?;";
 
-    public ArticleDao() {
+    public HomeDao() {
     }
 
     protected Connection getConnection() {
@@ -109,55 +109,6 @@ public class ArticleDao {
         return articles;
     }
 // list 3 article
-//    public List<Article> selectAllArticles() {
-//        Connection connection = null;
-//        PreparedStatement preparedStatement = null;
-//        ResultSet rs = null;
-//        List<Article> articles = new ArrayList<>();
-//        try {
-//            connection = getConnection();
-//            preparedStatement = connection.prepareStatement("SELECT id, title, body, date FROM articles ORDER BY date DESC LIMIT 3");
-//            rs = preparedStatement.executeQuery();
-//            while (rs.next()) {
-//                int id = rs.getInt("id");
-//                String title = rs.getString("title");
-//                String body = rs.getString("body");
-//                String date = rs.getString("date");
-//                articles.add(new Article(id, title, body, date));
-//            }
-//        } catch (SQLException e) {
-//            printSQLException(e);
-//        } finally {
-//            finallySQLException(connection, preparedStatement, rs);
-//        }
-//        return articles;
-//    }
-    
-   // List Individual Article
-    public Article selectArticleById(int id) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        Article article = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement("SELECT id, title, body, date FROM articles WHERE id = ?");
-            preparedStatement.setInt(1, id);
-            rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                String title = rs.getString("title");
-                String body = rs.getString("body");
-                String date = rs.getString("date");
-                article = new Article(id, title, body, date);
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        } finally {
-            finallySQLException(connection, preparedStatement, rs);
-        }
-        return article;
-    }
-
     public List<Article> selectAllArticles() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -165,7 +116,7 @@ public class ArticleDao {
         List<Article> articles = new ArrayList<>();
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(SELECTALLARTICLES);
+            preparedStatement = connection.prepareStatement("SELECT id, title, body, date FROM articles ORDER BY date DESC LIMIT 3");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -181,6 +132,55 @@ public class ArticleDao {
         }
         return articles;
     }
+    
+    //List Individual Article
+//    public Article selectArticleById(int id) {
+//        Connection connection = null;
+//        PreparedStatement preparedStatement = null;
+//        ResultSet rs = null;
+//        Article article = null;
+//        try {
+//            connection = getConnection();
+//            preparedStatement = connection.prepareStatement("SELECT id, title, body, date FROM articles WHERE id = ?");
+//            preparedStatement.setInt(1, id);
+//            rs = preparedStatement.executeQuery();
+//            if (rs.next()) {
+//                String title = rs.getString("title");
+//                String body = rs.getString("body");
+//                String date = rs.getString("date");
+//                article = new Article(id, title, body, date);
+//            }
+//        } catch (SQLException e) {
+//            printSQLException(e);
+//        } finally {
+//            finallySQLException(connection, preparedStatement, rs);
+//        }
+//        return article;
+//    }
+
+//    public List<Article> selectAllArticles() {
+//        Connection connection = null;
+//        PreparedStatement preparedStatement = null;
+//        ResultSet rs = null;
+//        List<Article> articles = new ArrayList<>();
+//        try {
+//            connection = getConnection();
+//            preparedStatement = connection.prepareStatement(SELECTALLARTICLES);
+//            rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                int id = rs.getInt("id");
+//                String title = rs.getString("title");
+//                String body = rs.getString("body");
+//                String date = rs.getString("date");
+//                articles.add(new Article(id, title, body, date));
+//            }
+//        } catch (SQLException e) {
+//            printSQLException(e);
+//        } finally {
+//            finallySQLException(connection, preparedStatement, rs);
+//        }
+//        return articles;
+//    }
       
     public List<Categories> selectAllCategories() {
         Connection connection = null;

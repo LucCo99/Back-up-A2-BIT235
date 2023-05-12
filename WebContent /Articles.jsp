@@ -87,19 +87,20 @@
 </form>
     <h1>Wiki Application</h1>
     <ul>
-        <li><a href="Home.jsp">Home</a></li>
+        <li><a href="HomeServlet">Home</a></li>
         <li><a href="ArticleServlet">Articles</a></li>
         <li><a href="CategoriesServlet">Categories</a></li>
         <li><a href="login.jsp">Admin</a></li>
     </ul>
     <table>
         <tbody>
-        	<h2>Recent Articles</h2>
+        	<h2>All Articles</h2>
             <c:forEach var="article" items="${listArticle}">
                 <tr>
                     <td>
                         <div class="article-title"><c:out value="${article.getTitle()}" /></div>
                         <div class="article-body"><c:out value="${article.getBody()}" /></div>
+                       <td>|<a href="${pageContext.request.contextPath}/ArticleServlet?action=view&id=${article.getId()}">View</a>|</td>
                     </td>
                 </tr>
             </c:forEach>

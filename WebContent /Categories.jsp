@@ -79,10 +79,10 @@
 	<div class="container">
 		<h1>Wiki Application</h1>
 		<ul>
-			<li><a href="Home.jsp">Home</a></li>
-			<li><a href="ArticleServlet">Articles</a></li>
-			<li><a href="">Categories</a></li>
-			<li><a href="login.jsp">Admin</a></li>
+			     <li><a href="HomeServlet">Home</a></li>
+        <li><a href="ArticleServlet">Articles</a></li>
+        <li><a href="CategoriesServlet">Categories</a></li>
+        <li><a href="login.jsp">Admin</a></li>
 		</ul>
 		<table>
 			<thead>

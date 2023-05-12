@@ -87,7 +87,7 @@
 </form>
     <h1>Wiki Application</h1>
     <ul>
-           <li><a href="HomeServlet">Home</a></li>
+        <li><a href="Home.jsp">Home</a></li>
         <li><a href="ArticleServlet">Articles</a></li>
         <li><a href="CategoriesServlet">Categories</a></li>
         <li><a href="login.jsp">Admin</a></li>
@@ -95,7 +95,7 @@
     <table>
         <tbody>
         	<h2>Recent Articles</h2>
-            <c:forEach var="article" items="${listArticle}">
+            <c:forEach var="article" items="${showArticle}">
                 <tr>
                     <td>
                         <div class="article-title"><c:out value="${article.getTitle()}" /></div>

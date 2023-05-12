@@ -65,8 +65,8 @@ public class ArticleServlet extends HttpServlet {
 		}
 		try {
 			switch (action) {
-			case "new":
-				listCategories(request, response);
+			case "view":
+				showArticle(request, response);
 				break;
 			//case "insert":
 				//insertNewEmployee(request, response);
@@ -77,9 +77,9 @@ public class ArticleServlet extends HttpServlet {
 			//case "edit":
 				//showEditEmployee(request, response);
 				//break;
-			//case "update":
-				//updateExistingEmployee(request, response);
-				//break;
+//			case "list all article":
+//				listArticles(request, response);
+//				break;
 			default:
 				listArticle(request, response);
 				break;
@@ -96,6 +96,27 @@ public class ArticleServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Articles.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	//list Individual Article
+	private void showArticle(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {//action=show&id=
+	int articleId = Integer.parseInt(request.getParameter("id"));
+	Article article = artDAO.selectArticleById(articleId);
+	request.setAttribute("article", article);
+	RequestDispatcher dispatcher = request.getRequestDispatcher("Article.jsp");
+	dispatcher.forward(request, response);
+}
+//	private void listArticle(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, ServletException {
+//		List<Article> allEmployee = artDAO.selectAllArticles();
+//		List<Article> firstThreeArticles = allEmployee.subList(0, 3); // get the first three articles
+//		request.setAttribute("listArticle", firstThreeArticles);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("Articles.jsp");
+//		dispatcher.forward(request, response);
+//	}
+
+	
+
 	
 	private void listCategories(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {//action=default
