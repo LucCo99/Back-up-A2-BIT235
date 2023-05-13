@@ -67,9 +67,9 @@ public class HomeServlet extends HttpServlet {
 		}
 		try {
 			switch (action) {
-//			case "new":
-//				listCategories(request, response);
-//				break;
+			case "new":
+				showArticle(request, response);
+				break;
 			//case "insert":
 				//insertNewEmployee(request, response);
 				//break;
@@ -100,14 +100,14 @@ public class HomeServlet extends HttpServlet {
 //	}
 	
 	//list Individual Article
-//	private void showArticle(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException, ServletException {//action=show&id=
-//	int articleId = Integer.parseInt(request.getParameter("id"));
-//	Article article = homDAO.selectArticleById(articleId);
-//	request.setAttribute("article", article);
-//	RequestDispatcher dispatcher = request.getRequestDispatcher("Article.jsp");
-//	dispatcher.forward(request, response);
-//}
+	private void showArticle(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {//action=show&id=
+	int articleId = Integer.parseInt(request.getParameter("id"));
+	Article article = homDAO.selectArticleById(articleId);
+	request.setAttribute("article", article);
+	RequestDispatcher dispatcher = request.getRequestDispatcher("IndividualArticle.jsp");
+	dispatcher.forward(request, response);
+}
 	private void listArticle(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Article> allEmployee = homDAO.selectAllArticles();

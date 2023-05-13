@@ -73,7 +73,8 @@ public class HomeDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                article = new Article(id, title, body, date);
+                String category = rs.getString("category");
+                article = new Article(id, title, body, date, category);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -99,7 +100,8 @@ public class HomeDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                articles.add(new Article(id, title, body, date));
+                String category = rs.getString("category");
+                articles.add(new Article(id, title, body, date, category));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -123,7 +125,8 @@ public class HomeDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                articles.add(new Article(id, title, body, date));
+             
+                articles.add(new Article(id, title, body, date,null));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -134,29 +137,30 @@ public class HomeDao {
     }
     
     //List Individual Article
-//    public Article selectArticleById(int id) {
-//        Connection connection = null;
-//        PreparedStatement preparedStatement = null;
-//        ResultSet rs = null;
-//        Article article = null;
-//        try {
-//            connection = getConnection();
-//            preparedStatement = connection.prepareStatement("SELECT id, title, body, date FROM articles WHERE id = ?");
-//            preparedStatement.setInt(1, id);
-//            rs = preparedStatement.executeQuery();
-//            if (rs.next()) {
-//                String title = rs.getString("title");
-//                String body = rs.getString("body");
-//                String date = rs.getString("date");
-//                article = new Article(id, title, body, date);
-//            }
-//        } catch (SQLException e) {
-//            printSQLException(e);
-//        } finally {
-//            finallySQLException(connection, preparedStatement, rs);
-//        }
-//        return article;
-//    }
+    public Article selectArticleById(int id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        Article article = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(SELECTARTICLEID);
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String title = rs.getString("title");
+                String body = rs.getString("body");
+                String date = rs.getString("date");
+                String category = rs.getString("category");
+                article = new Article(id, title, body, date, category);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        } finally {
+            finallySQLException(connection, preparedStatement, rs);
+        }
+        return article;
+    }
 
 //    public List<Article> selectAllArticles() {
 //        Connection connection = null;
@@ -194,7 +198,8 @@ public class HomeDao {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                articles.add(new Categories(id, title));
+                String catagory = rs.getString("catagory");
+                articles.add(new Categories(id, title, catagory));
             }
         } catch (SQLException e) {
             printSQLException(e);

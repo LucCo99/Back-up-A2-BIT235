@@ -5,14 +5,16 @@ public class Article {
     protected String title;
     protected String body;
     protected String date;
+    protected String category;
 
     public Article() {}
 
-    public Article(int id, String title, String body, String date) {
+    public Article(int id, String title, String body, String date,String category) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.date = date;
+        this.category = category;
 
     }
 
@@ -46,5 +48,13 @@ public class Article {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

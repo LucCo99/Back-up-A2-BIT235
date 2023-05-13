@@ -100,7 +100,7 @@
                     <td>
                         <div class="article-title"><c:out value="${article.getTitle()}" /></div>
                         <div class="article-body"><c:out value="${article.getBody()}" /></div>
-                       <td>|<a href="${pageContext.request.contextPath}/ArticleServlet?action=view&id=${article.getId()}">View</a>|</td>
+                       <td>|<a href="${pageContext.request.contextPath}/IndividualArticleServlet?action=view&id=<c:out value='${article.getId()}' />">View</a>|</td>
                     </td>
                 </tr>
             </c:forEach>

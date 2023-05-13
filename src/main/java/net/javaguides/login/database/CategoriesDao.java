@@ -69,7 +69,8 @@ public class CategoriesDao {
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String title = rs.getString("title");
-                Categories = new Categories(id, title);
+                String category = rs.getString("category");
+                Categories = new Categories(id, title, category);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -92,7 +93,8 @@ public class CategoriesDao {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                Categoriess.add(new Categories(id, title));
+                String category = rs.getString("category");
+                Categoriess.add(new Categories(id, title, category));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -127,7 +129,7 @@ public boolean updateCategories(Categories Categories) throws SQLException {
         preparedStatement = connection.prepareStatement(UPDATECategoriesSQL);
         // Use the appropriate setters to set the values for the prepared statement
         preparedStatement.setString(1, Categories.getTitle());
-        preparedStatement.setInt(3, Categories.getId());
+        preparedStatement.setString(3, Categories.getCategory());
         CategoriesUpdated = preparedStatement.executeUpdate() > 0 ? true : false;
     } catch (SQLException e) {
         // Handle any exceptions that occur during execution of the prepared statement

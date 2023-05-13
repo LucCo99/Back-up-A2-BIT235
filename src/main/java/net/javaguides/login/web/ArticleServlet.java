@@ -53,6 +53,10 @@ public class ArticleServlet extends HttpServlet {
         request.setAttribute("listArticle", articles);
         request.getRequestDispatcher("Articles.jsp").forward(request, response);
     }
+	
+	
+
+
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -99,13 +103,16 @@ public class ArticleServlet extends HttpServlet {
 	
 	//list Individual Article
 	private void showArticle(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {//action=show&id=
-	int articleId = Integer.parseInt(request.getParameter("id"));
-	Article article = artDAO.selectArticleById(articleId);
-	request.setAttribute("article", article);
-	RequestDispatcher dispatcher = request.getRequestDispatcher("Article.jsp");
-	dispatcher.forward(request, response);
-}
+	        throws SQLException, IOException, ServletException {
+	    int articleId = Integer.parseInt(request.getParameter("id"));
+	    Article article = artDAO.selectArticleById(articleId);
+	    request.setAttribute("article", article);
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("IndividualArticle.jsp");
+	    dispatcher.forward(request, response);
+	}
+
+
+
 //	private void listArticle(HttpServletRequest request, HttpServletResponse response)
 //			throws SQLException, IOException, ServletException {
 //		List<Article> allEmployee = artDAO.selectAllArticles();
@@ -125,6 +132,8 @@ public class ArticleServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Articles.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	
 
 
 }

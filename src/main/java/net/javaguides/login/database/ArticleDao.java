@@ -73,7 +73,8 @@ public class ArticleDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                article = new Article(id, title, body, date);
+                String category = rs.getString("category");
+                article = new Article(id, title, body, date, category);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -99,7 +100,8 @@ public class ArticleDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                articles.add(new Article(id, title, body, date));
+                String category = rs.getString("category");
+                articles.add(new Article(id, title, body, date, category));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -141,14 +143,15 @@ public class ArticleDao {
         Article article = null;
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("SELECT id, title, body, date FROM articles WHERE id = ?");
+            preparedStatement = connection.prepareStatement("SELECT id, title, body, date, category FROM articles WHERE id = ?");
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                article = new Article(id, title, body, date);
+                String category = rs.getString("category");
+                article = new Article(id, title, body, date, category);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -157,6 +160,8 @@ public class ArticleDao {
         }
         return article;
     }
+
+
 
     public List<Article> selectAllArticles() {
         Connection connection = null;
@@ -172,7 +177,8 @@ public class ArticleDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                articles.add(new Article(id, title, body, date));
+                String category = rs.getString("category");
+                articles.add(new Article(id, title, body, date, category));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -194,7 +200,8 @@ public class ArticleDao {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-                articles.add(new Categories(id, title));
+                String category = rs.getString("category");
+                articles.add(new Categories(id, title, category));
             }
         } catch (SQLException e) {
             printSQLException(e);

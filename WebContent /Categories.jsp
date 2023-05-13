@@ -87,15 +87,14 @@
 		<table>
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Title</th>
+					<th>Categories</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${listCategories}" var="categories">
 			<tr>
-			<td><c:out value="${categories.getId()}" /></td>
-						<td><c:out value="${categories.getTitle()}" /></td>
+			<td><c:out value="${categories.getTitle()}" /></td>
+<%-- 						<td><c:out value="${categories.getTitle()}" /></td> --%>
 			</tr>
 		</c:forEach>
 			</tbody>

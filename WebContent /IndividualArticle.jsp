@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Wiki Application</title>
 	<style>
 	body {
 		font-family: Arial, sans-serif;
@@ -78,33 +75,16 @@
 		padding: 10px;
 	}
 </style>
+	<meta charset="UTF-8">
+	<title><c:out value="${article.getTitle()}" /></title>
 </head>
 <body>
-	<div class="container">
-	<form method="get" action="ArticleServlet" style="position: absolute; top: 20px; right: 20px;">
-  <input type="text" name="keyword" placeholder="Search articles...">
-  <button type="submit">Search</button>
-</form>
-    <h1>Wiki Application</h1>
-    <ul>
-        <li><a href="Home.jsp">Home</a></li>
-        <li><a href="ArticleServlet">Articles</a></li>
-        <li><a href="CategoriesServlet">Categories</a></li>
-        <li><a href="login.jsp">Admin</a></li>
-    </ul>
-    <table>
-        <tbody>
-        	<h2>Recent Articles</h2>
-            <c:forEach var="article" items="${showArticle}">
-                <tr>
-                    <td>
-                        <div class="article-title"><c:out value="${article.getTitle()}" /></div>
-                        <div class="article-body"><c:out value="${article.getBody()}" /></div>
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-</div>
+	<h1><c:out value="${article.getTitle()}" /></h1>
+	<p>Date: <c:out value="${article.getDate()}" /></p>
+	<p>Category: <c:out value="${article.getCategory()}" /></p> 
+	<br>
+	<p>Body: <c:out value="${article.getBody()}" /></p>
+	
 </body>
 </html>
+
