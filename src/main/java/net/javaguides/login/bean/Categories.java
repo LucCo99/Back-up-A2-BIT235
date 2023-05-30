@@ -10,7 +10,13 @@ public class Categories {
     public Categories(int id, String title,String category) {
         this.id = id;
         this.title = title;
-        this.title = category;
+        this.category = category;
+
+    }
+
+    public Categories(int id,String category) {
+        this.id = id;
+        this.category = category;
 
     }
 
@@ -20,6 +26,10 @@ public class Categories {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {

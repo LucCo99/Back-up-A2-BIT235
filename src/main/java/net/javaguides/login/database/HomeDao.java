@@ -73,8 +73,8 @@ public class HomeDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                String category = rs.getString("category");
-                article = new Article(id, title, body, date, category);
+//                String category = rs.getString("category");
+                article = new Article(id, title, body, date);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -100,8 +100,8 @@ public class HomeDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                String category = rs.getString("category");
-                articles.add(new Article(id, title, body, date, category));
+//                String category = rs.getString("category");
+                articles.add(new Article(id, title, body, date));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -126,7 +126,7 @@ public class HomeDao {
                 String body = rs.getString("body");
                 String date = rs.getString("date");
              
-                articles.add(new Article(id, title, body, date,null));
+                articles.add(new Article(id, title, body, date));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -151,8 +151,8 @@ public class HomeDao {
                 String title = rs.getString("title");
                 String body = rs.getString("body");
                 String date = rs.getString("date");
-                String category = rs.getString("category");
-                article = new Article(id, title, body, date, category);
+//                String category = rs.getString("category");
+                article = new Article(id, title, body, date);
             }
         } catch (SQLException e) {
             printSQLException(e);

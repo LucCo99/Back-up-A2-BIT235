@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.javaguides.login.bean.Categories;
+
+//import net.javaguides.login.bean.Categories;
 import net.javaguides.login.bean.Article;
 import net.javaguides.login.database.ArticleDao;
 
@@ -78,12 +79,12 @@ public class ArticleServlet extends HttpServlet {
 			//case "delete":
 				//deleteExistingEmployee(request, response);
 				//break;
-			//case "edit":
-				//showEditEmployee(request, response);
-				//break;
-//			case "list all article":
-//				listArticles(request, response);
-//				break;
+			case "edit":
+				showEditEmployee(request, response);
+				break;
+			case "listCate":
+				listArticle(request, response);
+				break;
 			default:
 				listArticle(request, response);
 				break;
@@ -101,6 +102,7 @@ public class ArticleServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
+	
 	//list Individual Article
 	private void showArticle(HttpServletRequest request, HttpServletResponse response)
 	        throws SQLException, IOException, ServletException {
@@ -109,6 +111,15 @@ public class ArticleServlet extends HttpServlet {
 	    request.setAttribute("article", article);
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("IndividualArticle.jsp");
 	    dispatcher.forward(request, response);
+	}
+	
+	private void showEditEmployee(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {//action="edit"
+		int id = Integer.parseInt(request.getParameter("id"));
+		Article existingEmployee = artDAO.selectArticle(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("selectArticle.jsp");
+		request.setAttribute("employee", existingEmployee);
+		dispatcher.forward(request, response);
 	}
 
 
@@ -125,15 +136,13 @@ public class ArticleServlet extends HttpServlet {
 	
 
 	
-	private void listCategories(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {//action=default
-		List<Categories> allEmployee = artDAO.selectAllCategories();
-		request.setAttribute("listCategories", allEmployee);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Articles.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-	
+//	private void listCategories(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, ServletException {//action=default
+//		List<Categories> allEmployee = artDAO.selectAllCategories();
+//		request.setAttribute("listCategories", allEmployee);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("Categories.jsp");
+//		dispatcher.forward(request, response);
+//	}
 
 
 }

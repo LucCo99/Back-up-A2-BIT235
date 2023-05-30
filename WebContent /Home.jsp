@@ -88,7 +88,7 @@
     <h1>Wiki Application</h1>
     <ul>
            <li><a href="HomeServlet">Home</a></li>
-        <li><a href="ArticleServlet">Articles</a></li>
+        <li><a href="${pageContext.request.contextPath}/ArticleServlet?action=list">Articles</a></li>
         <li><a href="CategoriesServlet">Categories</a></li>
         <li><a href="login.jsp">Admin</a></li>
     </ul>

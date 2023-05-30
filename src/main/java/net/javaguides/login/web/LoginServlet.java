@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         	// check the login attempt is valid on loginDAO 
         	//if yes it will bring us to loginsucces.jsp page 
             if (loginDao.validate(loginBean)) {
-                response.sendRedirect("loginsuccess.jsp");
+                response.sendRedirect("AdminServlet");
             } 
          // else it will direct us to loginfail page 
             else {

@@ -70,18 +70,6 @@ public class HomeServlet extends HttpServlet {
 			case "new":
 				showArticle(request, response);
 				break;
-			//case "insert":
-				//insertNewEmployee(request, response);
-				//break;
-			//case "delete":
-				//deleteExistingEmployee(request, response);
-				//break;
-			//case "edit":
-				//showEditEmployee(request, response);
-				//break;
-//			case "list all article":
-//				listArticles(request, response);
-//				break;
 			default:
 				listArticle(request, response);
 				break;
@@ -90,14 +78,6 @@ public class HomeServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}// End of doPost method
-
-//	private void listArticles(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException, ServletException {//action=default
-//		List<Article> allEmployee = homDAO.selectAllArticles();
-//		request.setAttribute("listArticle", allEmployee);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("Articles.jsp");
-//		dispatcher.forward(request, response);
-//	}
 	
 	//list Individual Article
 	private void showArticle(HttpServletRequest request, HttpServletResponse response)

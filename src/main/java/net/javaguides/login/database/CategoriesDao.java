@@ -20,7 +20,7 @@ public class CategoriesDao {
 
     private String INSERTCategoriesSQL = "INSERT INTO articles (title, body, date) VALUES (?, ?, ?);";
     private String SELECTCategoriesID = "SELECT id, title, body, date FROM articles WHERE id = ?";
-    private String SELECTALLCategoriesS = "SELECT * FROM articles";
+    private String SELECTALLCategoriesS = "SELECT * FROM categories";
     private String DELETECategoriesSQL = "DELETE FROM articles WHERE id = ?;";
     private String UPDATECategoriesSQL = "UPDATE articles SET title = ?, body = ?, date = ? WHERE id = ?;";
 
@@ -92,9 +92,8 @@ public class CategoriesDao {
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String title = rs.getString("title");
                 String category = rs.getString("category");
-                Categoriess.add(new Categories(id, title, category));
+                Categoriess.add(new Categories(id, category));
             }
         } catch (SQLException e) {
             printSQLException(e);

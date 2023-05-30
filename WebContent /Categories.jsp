@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<jsp:useBean id="Article" class="net.javaguides.login.bean.Article" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,28 +77,29 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Wiki Application</h1>
-		<ul>
-			     <li><a href="HomeServlet">Home</a></li>
-        <li><a href="ArticleServlet">Articles</a></li>
-        <li><a href="CategoriesServlet">Categories</a></li>
-        <li><a href="login.jsp">Admin</a></li>
-		</ul>
-		<table>
-			<thead>
-				<tr>
-					<th>Categories</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${listCategories}" var="categories">
-			<tr>
-			<td><c:out value="${categories.getTitle()}" /></td>
-<%-- 						<td><c:out value="${categories.getTitle()}" /></td> --%>
-			</tr>
-		</c:forEach>
-			</tbody>
-		</table>
-	</div>
+  <h1>Wiki Application</h1>
+  <ul>
+    <li><a href="HomeServlet">Home</a></li>
+    <li><a href="ArticleServlet">Articles</a></li>
+    <li><a href="CategoriesServlet">Categories</a></li>
+    <li><a href="login.jsp">Admin</a></li>
+  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Categories</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${listCategories}" var="category">
+        <tr>
+          <td><c:out value="${category.getId()}" /></td>
+          <td><c:out value="${category.getCategory()}" /></td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+</div>
+
 </body>
 </html>
